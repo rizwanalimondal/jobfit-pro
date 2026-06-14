@@ -1,0 +1,25 @@
+{
+  "name": "jobfit-pro",
+  "version": "1.0.0",
+  "description": "AI-powered, no-fabrication resume & cover letter optimizer with transparent match scoring and gap analysis",
+  "type": "module",
+  "license": "MIT",
+  "author": "Rizwan Ali Mondal (https://www.navallogic.com)",
+  "homepage": "https://github.com/rizwanalimondal/jobfit-pro",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "mammoth": "^1.8.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  }
+}
