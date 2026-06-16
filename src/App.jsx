@@ -32,6 +32,13 @@ const LOCAL_KEY =
     import.meta.env.VITE_ANTHROPIC_API_KEY) ||
   "";
 
+// Keyless ambient auth only works inside a Claude artifact (sandboxed iframe
+// with a null origin, or served from a claude.ai/claude.site domain).
+const IS_ARTIFACT =
+  typeof window !== "undefined" &&
+  (window.location.origin === "null" ||
+    /claude\.(ai|site)/.test(window.location.origin));
+
 async function callClaude(prompt, { signal, tools } = {}) {
   const headers = { "Content-Type": "application/json" };
   // Local mode: caller supplied their own key via .env.
@@ -678,6 +685,14 @@ export default function App() {
   }, []);
 
   const runGeneration = async () => {
+    if (!LOCAL_KEY && !IS_ARTIFACT) {
+      setError(
+        "API key required — JobFit Pro is a portfolio demo that uses your own Anthropic API key " +
+        "to generate documents. Add your key to a .env file as VITE_ANTHROPIC_API_KEY=sk-ant-... " +
+        "and restart the dev server. See the README for setup instructions, or get a key at console.anthropic.com."
+      );
+      return;
+    }
     setBusy(true);
     setError("");
     const profileText = mergeProfile(profile);
